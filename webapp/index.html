@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PyTorch Titanic デモ</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">PyTorch Titanic</p>
+          <h1>生存予測デモ</h1>
+          <p class="lead">
+            こちらは学習済みモデルの代わりに、簡易的なルールベース係数でスコアを計算するデモです。
+            実データで学習したモデルはノートブックから生成してください。
+          </p>
+        </div>
+        <div class="score-card" id="score-card">
+          <p class="score-label">予測スコア</p>
+          <p class="score-value" id="score">0.00</p>
+          <p class="score-caption" id="score-caption">入力値を調整してください</p>
+        </div>
+      </header>
+
+      <section class="panel">
+        <h2>入力パラメータ</h2>
+        <form id="predict-form" class="form-grid">
+          <label>
+            性別
+            <select name="sex" id="sex">
+              <option value="female">女性</option>
+              <option value="male">男性</option>
+            </select>
+          </label>
+          <label>
+            年齢
+            <input type="number" name="age" id="age" min="0" max="80" value="29" />
+          </label>
+          <label>
+            乗船クラス
+            <select name="pclass" id="pclass">
+              <option value="1">1等</option>
+              <option value="2">2等</option>
+              <option value="3" selected>3等</option>
+            </select>
+          </label>
+          <label>
+            料金
+            <input type="number" name="fare" id="fare" min="0" step="0.1" value="13.0" />
+          </label>
+          <label>
+            同乗兄弟・配偶者数
+            <input type="number" name="sibsp" id="sibsp" min="0" max="8" value="0" />
+          </label>
+          <label>
+            同乗親・子供数
+            <input type="number" name="parch" id="parch" min="0" max="6" value="0" />
+          </label>
+          <button type="submit" class="primary">スコア更新</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>簡易モデルの仕組み</h2>
+        <ul class="list">
+          <li>女性・上位クラスほどスコアが上昇するように係数を設定しています。</li>
+          <li>年齢・同乗家族数はスコアに緩やかな影響を与えます。</li>
+          <li>このスコアはデモ用途のため、実際の生存確率とは異なります。</li>
+        </ul>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
